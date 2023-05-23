@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be found
 // in the LICENSE file.
 
-package httprouter
+package httpr
 
 import (
 	"fmt"
@@ -92,6 +92,42 @@ func checkPriorities(t *testing.T, n *node) uint32 {
 
 	return prio
 }
+
+// func TestTraverse(t *testing.T) {
+// 	tree := &node{}
+
+// 	routes := [...]string{
+// 		"/hi/:hiId/load",
+// 		"/he/:heId/load",
+// 		"/h/mem/load",
+// 		"/h/kek/dadaya",
+// 		"/contact/:id/mem",
+// 		"/doc/",
+// 		"/doc/go_faq.html",
+// 	}
+// 	for _, route := range routes {
+// 		tree.addRoute(route, fakeHandler(route))
+// 	}
+
+// 	type pair struct {
+// 		n    *node
+// 		prnt *node
+// 	}
+
+// 	q := make(chan *pair, 100)
+// 	q <- &pair{n: tree, prnt: nil}
+// 	for len(q) != 0 {
+// 		pr := <-q
+// 		if pr.prnt != nil {
+// 			t.Logf("parent: %s, path: %s, indices: %s, prior: %d, type: %d", pr.prnt.path, pr.n.path, pr.n.indices, pr.n.priority, pr.n.nType)
+// 		} else {
+// 			t.Logf("path: %s, indices: %s, prior: %d, type: %d", pr.n.path, pr.n.indices, pr.n.priority, pr.n.nType)
+// 		}
+// 		for _, nd := range pr.n.children {
+// 			q <- &pair{n: nd, prnt: pr.n}
+// 		}
+// 	}
+// }
 
 func TestCountParams(t *testing.T) {
 	if countParams("/path/:param1/static/*catch-all") != 2 {
